@@ -69,6 +69,24 @@ guid = str(uuid.uuid4())
 uri = url+guid
 
 
+def get_json(payload):
+    """Select items with IP information and in the Common service area and fill
+    set.
+
+    Usage:
+        get_common_ipv4()
+
+    :return: JSON with Microsoft 365 Common and Office Online service IPv4 routes
+    """
+    try:
+        the_json = json.dumps(payload, indent=4, sort_keys=True)
+        return the_json
+    except ValueError as e:
+        print(e)
+    except TypeError as e:
+        print(e)
+
+
 def get_data():
     """json_data is raw data; a list with all dict items.
 
@@ -109,9 +127,9 @@ def get_service_areas():
         service_areas_display_dic = {'serviceAreaDisplayNames': service_areas_display_lst}
         service_areas_lst = list(service_areas)
         service_areas_dic = {'serviceAreas': service_areas_lst}
-        all_service_areas_types_lst = [service_areas_dic, service_areas_display_dic]
-        service_areas_display_json = json.dumps(all_service_areas_types_lst, indent=4, sort_keys=True)
-        return service_areas_display_json
+        all_service_areas_lst = [service_areas_dic, service_areas_display_dic]
+        main_dic = {'serviceAreaInfo': all_service_areas_lst}
+        return get_json(main_dic)
     except ValueError as e:
         print(e)
     except TypeError as e:
@@ -131,8 +149,7 @@ def get_er_exceptions():
             if i['expressRoute'] is False:
                 express_route_exceptions_lst.append(i)
         express_route_exceptions_dic = {'expressRoutesExceptions': express_route_exceptions_lst}
-        er_exceptions = json.dumps(express_route_exceptions_dic, indent=4, sort_keys=True)
-        return er_exceptions
+        return get_json(express_route_exceptions_dic)
     except ValueError as e:
         print(e)
 
@@ -146,8 +163,7 @@ def get_all_items():
     :return: Raw JSON from given IRI
     """
     try:
-        raw_json = json.dumps(get_data(), indent=4, sort_keys=True)
-        return raw_json
+        return get_json(get_data())
     except ValueError as e:
         print(e)
     except TypeError as e:
@@ -168,8 +184,7 @@ def get_items_with_ips():
             if 'ips' in i:
                 all_items_with_ips_lst.append(i)
         all_items_with_ips_dic = {'allItemsWithIPs': all_items_with_ips_lst}
-        all_ip_json = json.dumps(all_items_with_ips_dic, indent=4, sort_keys=True)
-        return all_ip_json
+        return get_json(all_items_with_ips_dic)
     except ValueError as e:
         print(e)
     except TypeError as e:
@@ -195,8 +210,7 @@ def get_common_ipv4():
                         common_ips_set.add(j)
         common_ips_lst = list(common_ips_set)
         common_ips_dic = {'microsoft365CommonAndOfficeOnlineIPv4': common_ips_lst}
-        common_ips_json = json.dumps(common_ips_dic, indent=4, sort_keys=True)
-        return common_ips_json
+        return get_json(common_ips_dic)
     except ValueError as e:
         print(e)
     except TypeError as e:
@@ -222,8 +236,7 @@ def get_common_ipv6():
                         common_ips_set.add(j)
         common_ips_lst = list(common_ips_set)
         common_ips_dic = {'microsoft365CommonAndOfficeOnlineIPv6': common_ips_lst}
-        common_ips_json = json.dumps(common_ips_dic, indent=4, sort_keys=True)
-        return common_ips_json
+        return get_json(common_ips_dic)
     except ValueError as e:
         print(e)
     except TypeError as e:
@@ -249,8 +262,7 @@ def get_exchange_ipv4():
                         exchange_ips_set.add(j)
         exchange_ips_lst = list(exchange_ips_set)
         exchange_ips_dic = {'exchangeOnlineIPv4': exchange_ips_lst}
-        exchange_ips_json = json.dumps(exchange_ips_dic, indent=4, sort_keys=True)
-        return exchange_ips_json
+        return get_json(exchange_ips_dic)
     except ValueError as e:
         print(e)
     except TypeError as e:
@@ -276,8 +288,7 @@ def get_exchange_ipv6():
                         exchange_ips_set.add(j)
         exchange_ips_lst = list(exchange_ips_set)
         exchange_ips_dic = {'exchangeOnlineIPv6': exchange_ips_lst}
-        exchange_ips_json = json.dumps(exchange_ips_dic, indent=4, sort_keys=True)
-        return exchange_ips_json
+        return get_json(exchange_ips_dic)
     except ValueError as e:
         print(e)
     except TypeError as e:
@@ -303,8 +314,7 @@ def get_sharepoint_ipv4():
                         sharepoint_ips_set.add(j)
         sharepoint_ips_lst = list(sharepoint_ips_set)
         sharepoint_ips_dic = {'sharePointOnlineAndOneDriveForBusinessIPv4': sharepoint_ips_lst}
-        sharepoint_ips_json = json.dumps(sharepoint_ips_dic, indent=4, sort_keys=True)
-        return sharepoint_ips_json
+        return get_json(sharepoint_ips_dic)
     except ValueError as e:
         print(e)
     except TypeError as e:
@@ -330,8 +340,7 @@ def get_sharepoint_ipv6():
                         sharepoint_ips_set.add(j)
         sharepoint_ips_lst = list(sharepoint_ips_set)
         sharepoint_ips_dic = {'sharePointOnlineAndOneDriveForBusinessIPv6': sharepoint_ips_lst}
-        sharepoint_ips_json = json.dumps(sharepoint_ips_dic, indent=4, sort_keys=True)
-        return sharepoint_ips_json
+        return get_json(sharepoint_ips_dic)
     except ValueError as e:
         print(e)
     except TypeError as e:
@@ -357,8 +366,7 @@ def get_skype_ipv4():
                         skype_ips_set.add(j)
         skype_ips_lst = list(skype_ips_set)
         skype_ips_dic = {'skypeForBusinessOnlineAndMicrosoftTeamsIPv4': skype_ips_lst}
-        skype_ips_json = json.dumps(skype_ips_dic, indent=4, sort_keys=True)
-        return skype_ips_json
+        return get_json(skype_ips_dic)
     except ValueError as e:
         print(e)
     except TypeError as e:
@@ -384,8 +392,7 @@ def get_skype_ipv6():
                         skype_ips_set.add(j)
         skype_ips_lst = list(skype_ips_set)
         skype_ips_dic = {'skypeForBusinessOnlineAndMicrosoftTeamsIPv6': skype_ips_lst}
-        skype_ips_json = json.dumps(skype_ips_dic, indent=4, sort_keys=True)
-        return skype_ips_json
+        return get_json(skype_ips_dic)
     except ValueError as e:
         print(e)
     except TypeError as e:
@@ -394,17 +401,17 @@ def get_skype_ipv6():
 
 def main():
     print(get_service_areas())
-    #print(get_all_items())
-    #print(get_er_exceptions())
-    #print(get_items_with_ips())
-    #print(get_common_ipv4())
-    #print(get_common_ipv6())
-    #print(get_exchange_ipv4())
-    #print(get_exchange_ipv6())
-    #print(get_sharepoint_ipv4())
-    #print(get_sharepoint_ipv6())
-    #print(get_skype_ipv4())
-    #print(get_skype_ipv6())
+    print(get_all_items())
+    print(get_er_exceptions())
+    print(get_items_with_ips())
+    print(get_common_ipv4())
+    print(get_common_ipv6())
+    print(get_exchange_ipv4())
+    print(get_exchange_ipv6())
+    print(get_sharepoint_ipv4())
+    print(get_sharepoint_ipv6())
+    print(get_skype_ipv4())
+    print(get_skype_ipv6())
 
 if __name__ == "__main__":
     main()
