@@ -25,7 +25,7 @@ index = {
 }
 
 intro = '''\nWelcome to O365 dissector.\n
-Enter the number of the system you wish to test or Ctrl+C to exit:'''
+Enter filter number or Ctrl+C to exit:'''
 
 
 def main():
