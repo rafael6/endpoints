@@ -399,6 +399,74 @@ def get_skype_ipv6():
         print(e)
 
 
+def get_exchange_all():
+    """
+
+    :return:
+    """
+    exchange_all_lst = list()
+    try:
+        for i in get_data():
+            if i['serviceArea'] == 'Exchange':
+                exchange_all_lst.append(i)
+        exchange_all_dic = {'exchangeOnlineAll': exchange_all_lst}
+        return get_json(exchange_all_dic)
+    except ValueError as e:
+        print(e)
+    except TypeError as e:
+        print(e)
+
+
+def get_skype_all():
+    """
+
+    :return:
+    """
+    skype_all_lst = list()
+    try:
+        for i in get_data():
+            if i['serviceArea'] == 'Skype':
+                skype_all_lst.append(i)
+        skype_all_dic = {'skypeForBusinessOnlineAndMicrosoftTeamsAll': skype_all_lst}
+        return get_json(skype_all_dic)
+    except ValueError as e:
+        print(e)
+    except TypeError as e:
+        print(e)
+
+
+def get_sharepoint_all():
+    sharepoint_all_lst = list()
+    try:
+        for i in get_data():
+            if i['serviceArea'] == 'SharePoint':
+                sharepoint_all_lst.append(i)
+        sharepoint_all_dic = {'sharePointOnlineAndOneDriveForBusinessAll': sharepoint_all_lst}
+        return get_json(sharepoint_all_dic)
+    except ValueError as e:
+        print(e)
+    except TypeError as e:
+        print(e)
+
+
+def get_common_all():
+    """
+
+    :return:
+    """
+    common_all_lst = list()
+    try:
+        for i in get_data():
+            if i['serviceArea'] == 'Common':
+                common_all_lst.append(i)
+        common_all_dic = {'microsoft365CommonAndOfficeOnlineAll': common_all_lst}
+        return get_json(common_all_dic)
+    except ValueError as e:
+        print(e)
+    except TypeError as e:
+        print(e)
+
+
 def main():
     print(get_service_areas())
     print(get_all_items())
@@ -412,6 +480,10 @@ def main():
     print(get_sharepoint_ipv6())
     print(get_skype_ipv4())
     print(get_skype_ipv6())
+    print(get_exchange_all())
+    print(get_skype_all())
+    print(get_sharepoint_all())
+    print(get_common_all())
 
 if __name__ == "__main__":
     main()
