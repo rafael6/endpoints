@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import readline
-from toolbox import dissector
+from azure_endpoints import dissector
 
 
 # TODO place package in /usr/local/bin
@@ -12,16 +12,20 @@ from toolbox import dissector
 index = {
     1: 'Available service areas and display names.',
     2: 'Raw and complete source JSON.',
-    3: 'Express Route exceptions.',
-    4: 'All items from source JSON containing IPs.',
-    5: 'IPv4 networks for Microsoft 365 Common and Office Online.',
-    6: 'IPv6 networks for Microsoft 365 Common and Office Online.',
-    7: 'IPv4 networks for Exchange Online.',
-    8: 'IPv6 networks for Exchange Online.',
-    9: 'IPv4 networks for SharePoint Online and OneDrive for Business.',
-    10: 'IPv6 networks for SharePoint Online and OneDrive for Business',
-    11: 'IPv4 networks for Skype for Business Online and Microsoft Teams.',
-    12: 'IPv6 networks for Skype for Business Online and Microsoft Teams.'
+    3: 'All Exchange Online Items',
+    4: 'All Skype for Business Online and Microsoft Teams Items',
+    5: 'All SharePoint Online and OneDrive for Business Items',
+    6: 'All Microsoft 365 Common and Office Online Items',
+    7: 'Express Route exceptions.',
+    8: 'All items from source JSON containing IPs.',
+    9: 'IPv4 networks for Microsoft 365 Common and Office Online.',
+    10: 'IPv6 networks for Microsoft 365 Common and Office Online.',
+    11: 'IPv4 networks for Exchange Online.',
+    12: 'IPv6 networks for Exchange Online.',
+    13: 'IPv4 networks for SharePoint Online and OneDrive for Business.',
+    14: 'IPv6 networks for SharePoint Online and OneDrive for Business',
+    15: 'IPv4 networks for Skype for Business Online and Microsoft Teams.',
+    16: 'IPv6 networks for Skype for Business Online and Microsoft Teams.'
 }
 
 intro = '''\nWelcome to O365 dissector.\n
@@ -77,6 +81,18 @@ def main():
             elif funct == 'IPv6 networks for Skype for Business Online and Microsoft Teams.':
                 print(dissector.get_skype_ipv6())
 
+            elif funct == 'All Exchange Online Items':
+                print(dissector.get_exchange_all())
+
+            elif funct == 'All Skype for Business Online and Microsoft Teams Items':
+                print(dissector.get_skype_all())
+
+            elif funct == 'All SharePoint Online and OneDrive for Business Items':
+                print(dissector.get_sharepoint_all())
+
+            elif funct == 'All Microsoft 365 Common and Office Online Items':
+                print(dissector.get_common_all())
+
             else:
                 print('\n'+funct)
                 main()
@@ -88,4 +104,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
